@@ -2,7 +2,7 @@ import { Header } from "@components/header";
 import { Input } from "@components/input/input";
 import { VerbeteList } from "@components/verbete-list/verbeteList";
 import { FlatList, ListRenderItem, Text, View } from "react-native";
-import { Container, ListVerbetes, ListVerbetesss } from "./style";
+import { Container, ListVerbetesss } from "./style";
 import { Verbete } from "@components/verbete-list/style-verbete-list";
 
 const arrayList: FlatListType[] = [
@@ -14,6 +14,12 @@ const arrayList: FlatListType[] = [
   }
   ,{
     verbete: "teste3"
+  },
+  {
+    verbete: "teste4"
+  },
+  {
+    verbete: "teste5"
   }
 ] as const
 export type FlatListType = {
@@ -26,7 +32,7 @@ export function HomeScreen(){
   );
   return(
     <>
-      <Header />
+
       <Container>
         <Input />
         <FlatList

@@ -1,6 +1,6 @@
 
 import { Text, TextInput, View } from "react-native";
-import { Container, Heading, InputComponent } from "./style-input";
+import { Container, ContainerInput, Heading, InputComponent, SearchIcon } from "./style-input";
 import { MagnifyingGlass } from "phosphor-react-native";
 
 export function Input(){
@@ -8,13 +8,15 @@ export function Input(){
     <Container>
       <View>
         <Heading>Digite para pesquisar</Heading>
-        <InputComponent
-          placeholder="Palavra"
-        >
+        <ContainerInput>
+          <InputComponent
+            placeholder="Palavra"
+          />
+          <SearchIcon />
+        </ContainerInput>
 
-        </InputComponent>
       </View>
-      <MagnifyingGlass />
+      
     </Container>
   )
 }

@@ -1,11 +1,11 @@
-import { Image, Text, View } from "react-native";
-import imageAbl from '@assets/abl_horizontal_verde_louro.png'
+import imagesLouro from '@assets/louro.png'
 import { Container, Heading, Images } from "./style-header";
 export function Header(){
   return(
     <Container>
-      <Images 
-      source={imageAbl}
+
+    <Images 
+        source={imagesLouro}
       />
       <Heading>
         Vocabulário Ortográfico da Língua Portuguesa

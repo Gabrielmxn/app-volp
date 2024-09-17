@@ -1,3 +1,4 @@
+import { MagnifyingGlass } from "phosphor-react-native";
 import { Text, TextInput, View } from "react-native";
 import styled from "styled-components/native";
 
@@ -12,12 +13,25 @@ export const Heading = styled(Text)`
   margin-bottom: 4px;;
 `
 
+export const ContainerInput = styled.View`
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  padding: 8px;
+  background-color: ${(props) => props.theme.ablGreen};
+`
+
+export const SearchIcon = styled(MagnifyingGlass)`
+  color: ${(props) => props.theme.white};
+
+`
 export const InputComponent = styled.TextInput.attrs(props => ({
   placeholderTextColor: props.theme.white
 }))`
   width: 100%;
-  padding: 8px;
-  border-radius: 4px;
+
+  flex: 1;
   background-color: ${(props) => props.theme.ablGreen};
  color: ${(props) => props.theme.white};
 `
