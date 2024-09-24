@@ -15,6 +15,34 @@
       "when": 1726778252776,
       "tag": "0001_conscious_sabra",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1727205546006,
+      "tag": "0002_cloudy_wonder_man",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1727206156392,
+      "tag": "0003_past_red_shift",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1727206691293,
+      "tag": "0004_windy_blockbuster",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1727207236172,
+      "tag": "0005_chemical_captain_marvel",
+      "breakpoints": true
     }
   ]
 }

@@ -1,0 +1,1 @@
+ALTER TABLE `verbete` DROP COLUMN `code`;

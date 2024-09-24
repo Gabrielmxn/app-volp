@@ -1,4 +1,4 @@
 export interface Sync {
-  id: number
+  id: number | null
   date: string
 }

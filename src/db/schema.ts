@@ -11,6 +11,14 @@ export const sync = sqliteTable('sync', {
   date: text('description').notNull(),
 })
 
+export const verbete = sqliteTable('verbete', {
+  id: integer('id').primaryKey(),
+  description: text('description').notNull(),
+  foreing: integer('foreing', {
+    mode: "boolean"
+  }).notNull().default(false),
+})
+
 //(id INTEGER PRIMARY KEY NOT NULL, description TEXT NOT NULL, execution_date_operation INTEGER);
 
 /*   CREATE TABLE IF NOT EXISTS verbete (id INTEGER PRIMARY KEY NOT NULL, code INTEGER NOT NULL, description TEXT NOT NULL, estrangeira BOOLEAN);
