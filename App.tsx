@@ -7,8 +7,13 @@ import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator';
 import { db } from 'src/lib/db/drizzle';
 import migrations from './drizzle/migrations';
 import { Text } from 'react-native';
+import * as SQLite from "expo-sqlite";
+
+import { useDrizzleStudio } from 'expo-drizzle-studio-plugin';
+import { getVerbeteOfVolpExternalABL } from 'src/controllers/verbete';
 import { useEffect } from 'react';
-import { sync } from '@db/schema';
+
+
 
 
 
@@ -16,6 +21,9 @@ import { sync } from '@db/schema';
 
 export default function App() {
   const { success, error } = useMigrations(db, migrations);
+  const dbConfig = SQLite.openDatabaseSync("volp");
+  useDrizzleStudio(dbConfig);
+
 
  
   if(!success){
@@ -30,6 +38,7 @@ export default function App() {
     )
   }
 
+  
   return (
     <ThemeProvider theme={theme}>
       <Header />   

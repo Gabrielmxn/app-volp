@@ -1,16 +1,15 @@
 import {  verbete } from './../../../db/schema';
 import { Verbete } from "src/DTO/verbete";
-import { DrizzesVerbeteRepositoriesEntidade } from "../entidades/verbete-entidades";
+import {  VerbeteRepositoriesEntidade } from "../entidades/verbete-entidades";
 import { db } from 'src/lib/db/drizzle';
 
 
-export class DrizzesVerbeteRepositories implements DrizzesVerbeteRepositoriesEntidade{
+export class DrizzesVerbeteRepositories implements VerbeteRepositoriesEntidade{
   async registerVerbete(data: Verbete) {
-    const response = await db.insert(verbete).values(data).returning()
-
+    const response = await db.insert(verbete).values(data).onConflictDoNothing().returning()
 
     if(!response[0]){
-     throw new Error("Não foi possível cadastrar o verbete.")
+     console.log("Já está cadastrado")
     }
 
     return response[0]

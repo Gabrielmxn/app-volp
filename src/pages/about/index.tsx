@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { ContainerAbout, Description, Heading } from "./style";
 
 import {  Text } from "react-native";

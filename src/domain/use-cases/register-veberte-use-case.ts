@@ -1,14 +1,19 @@
+import { VerbeteRepositoriesEntidade } from "../repositories/entidades/verbete-entidades"
 
 
 export interface RegisterVeberteUseCaseRequest {
   code: number
   description: string
-  foreing: number
+  foreing: boolean
 }
 export class RegisterVeberteUseCase{
-  constructor(){}
+  constructor(private verbeteRepositoriesEntidade: VerbeteRepositoriesEntidade){}
 
-  execute({}: RegisterVeberteUseCaseRequest){
+  async execute({code, description, foreing}: RegisterVeberteUseCaseRequest){
+    const response = await this.verbeteRepositoriesEntidade.registerVerbete({
+      id: code, description, foreing
+    })
 
+    return response;
   }
 }

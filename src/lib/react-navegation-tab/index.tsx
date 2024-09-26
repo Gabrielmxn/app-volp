@@ -4,10 +4,19 @@ import { AboutScreen } from "@screens/about";
 import { HomeScreen } from "@screens/home";
 import { theme } from "@theme/theme";
 import { HouseSimple, Info } from "phosphor-react-native";
+import { useEffect } from "react";
+import { getVerbeteOfVolpExternalABL } from "src/controllers/verbete";
 
 const Tab = createBottomTabNavigator();
 
 export function ReactNavegationTab(){
+  async function getTest(){
+
+    await getVerbeteOfVolpExternalABL()
+  }
+  useEffect(() => {
+    getTest()
+  }, [])
   return(
     <NavigationContainer >
       <Tab.Navigator
