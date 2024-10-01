@@ -7,10 +7,10 @@ export interface RegisterVeberteUseCaseRequest {
   foreing: boolean
 }
 export class RegisterVeberteUseCase{
-  constructor(private verbeteRepositoriesEntidade: VerbeteRepositoriesEntidade){}
+  constructor(private verbeteRepository: VerbeteRepositoriesEntidade){}
 
   async execute({code, description, foreing}: RegisterVeberteUseCaseRequest){
-    const response = await this.verbeteRepositoriesEntidade.registerVerbete({
+    const response = await this.verbeteRepository.registerVerbete({
       id: code, description, foreing
     })
 

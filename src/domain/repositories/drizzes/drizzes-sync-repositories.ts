@@ -1,4 +1,4 @@
-import {  sync } from './../../../db/schema';
+import {  sync, verbete } from './../../../db/schema';
 import { db } from 'src/lib/db/drizzle';
 import {  FindByIdProps, SyncRepositories, UpdateDateLastSyncProps } from '../entidades/sync-entity';
 import { Sync } from 'src/DTO/sync';
@@ -24,8 +24,10 @@ export class DrizzesSyncRepositories implements SyncRepositories{
   }
   async fetchDateOfLastSync(){
     const response = await db.select().from(sync)
+    const responses = await db.select().from(verbete)
     console.log(response)
-
+    console.log(responses)
+console.log('responses')
     return response[0] ? response[0] : null
   }
  

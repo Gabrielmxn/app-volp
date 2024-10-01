@@ -22,6 +22,14 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-asset",
+        {
+          "assets": ["path/to/src/lib/db/drizzle/volp.db"]
+        }
+      ]
+    ]
   }
 }

@@ -21,7 +21,8 @@ import { useEffect } from 'react';
 
 export default function App() {
   const { success, error } = useMigrations(db, migrations);
-  const dbConfig = SQLite.openDatabaseSync("volp");
+
+  const dbConfig = SQLite.openDatabaseSync("volp.db");
   useDrizzleStudio(dbConfig);
 
 

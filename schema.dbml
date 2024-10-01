@@ -1,0 +1,16 @@
+table about {
+  id integer [pk, not null]
+  description text [not null]
+  execution_date_operation integer [not null]
+}
+
+table sync {
+  id integer
+  description text [not null]
+}
+
+table verbete {
+  id integer [pk, not null]
+  description text [not null]
+  foreing integer [not null, default: 0]
+}
