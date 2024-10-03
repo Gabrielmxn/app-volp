@@ -10,13 +10,7 @@ import { getVerbeteOfVolpExternalABL } from "src/controllers/verbete";
 const Tab = createBottomTabNavigator();
 
 export function ReactNavegationTab(){
-  async function getTest(){
-
-    await getVerbeteOfVolpExternalABL()
-  }
-  useEffect(() => {
-    getTest()
-  }, [])
+  
   return(
     <NavigationContainer >
       <Tab.Navigator

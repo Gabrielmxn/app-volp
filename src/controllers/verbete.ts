@@ -17,7 +17,7 @@ export async function  getVerbeteOfVolpExternalABL(){
   } 
 
   const response = await makeVerbeteOfApiExternal().execute({
-    date: date ? date : '2024-09-26_13:59:29'
+    date: date ? date : '2024-10-02_01:15:20'
   })
 
   const {sync} = await makeUpdateLastSyncUseCase().execute({

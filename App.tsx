@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components';
 import { Header } from '@components/header';
 import { ReactNavegationTab } from 'src/lib/react-navegation-tab';
 import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator';
-import { db } from 'src/lib/db/drizzle';
+import { db, openDatabase } from 'src/lib/db/drizzle';
 import migrations from './drizzle/migrations';
 import { Text } from 'react-native';
 import * as SQLite from "expo-sqlite";
@@ -20,9 +20,13 @@ import { useEffect } from 'react';
 
 
 export default function App() {
+
+  async function copyDb(){
+    await openDatabase('./src/lib/db/drizzle/volp.db')
+  }
   const { success, error } = useMigrations(db, migrations);
 
-  const dbConfig = SQLite.openDatabaseSync("volp.db");
+const dbConfig = SQLite.openDatabaseSync("volp.db");
   useDrizzleStudio(dbConfig);
 
 
@@ -39,7 +43,7 @@ export default function App() {
     )
   }
 
-  
+  copyDb()
   return (
     <ThemeProvider theme={theme}>
       <Header />   

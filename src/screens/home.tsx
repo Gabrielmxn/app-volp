@@ -4,6 +4,10 @@ import { VerbeteList } from "@components/verbete-list/verbeteList";
 import { FlatList, ListRenderItem, Text, View } from "react-native";
 import { Container, ListVerbetesss } from "./style";
 import { Verbete } from "@components/verbete-list/style-verbete-list";
+import { useEffect } from "react";
+import { getVerbeteOfVolpExternalABL } from "src/controllers/verbete";
+import { db } from "src/lib/db/drizzle";
+import { verbete } from "@db/schema";
 
 const arrayList: FlatListType[] = [
   {
@@ -30,6 +34,18 @@ export function HomeScreen(){
   const renderItem: ListRenderItem<FlatListType> = ({ item }) => (
     <Text>{item.verbete}</Text>
   );
+
+  async function getTest(){
+
+    await getVerbeteOfVolpExternalABL()
+
+    const test = await db.select().from(verbete)
+    console.log('test')
+    console.log(test)
+  }
+  useEffect(() => {
+    getTest()
+  }, [])
   return(
     <>
 
