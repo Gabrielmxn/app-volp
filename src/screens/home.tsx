@@ -37,9 +37,9 @@ export function HomeScreen(){
 
   async function getTest(){
 
-    await getVerbeteOfVolpExternalABL()
+  await getVerbeteOfVolpExternalABL()
 
-    const test = await db.select().from(verbete)
+    const test = await db.select().from(verbete).limit(4)
     console.log('test')
     console.log(test)
   }

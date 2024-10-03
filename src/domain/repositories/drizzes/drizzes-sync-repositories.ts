@@ -24,10 +24,6 @@ export class DrizzesSyncRepositories implements SyncRepositories{
   }
   async fetchDateOfLastSync(){
     const response = await db.select().from(sync)
-    const responses = await db.select().from(verbete)
-    console.log(response)
-    console.log(responses)
-console.log('responses')
     return response[0] ? response[0] : null
   }
  

@@ -8,14 +8,7 @@ import { popular } from "drizzle/seed";
 export async function  getVerbeteOfVolpExternalABL(){
   const { date } = await makeGetDateSyncUseCase().execute({})
 
-  // await executeSQLFile()
-
-  if(!date){
-    console.log(date)
-    console.log("POPULAR")
-    await popular()
-  } 
-
+ 
   const response = await makeVerbeteOfApiExternal().execute({
     date: date ? date : '2024-10-02_01:15:20'
   })

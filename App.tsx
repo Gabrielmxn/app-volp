@@ -22,7 +22,7 @@ import { useEffect } from 'react';
 export default function App() {
 
   async function copyDb(){
-    await openDatabase('./src/lib/db/drizzle/volp.db')
+    await openDatabase(require('./src/lib/db/drizzle/volp.db'))
   }
   const { success, error } = useMigrations(db, migrations);
 
