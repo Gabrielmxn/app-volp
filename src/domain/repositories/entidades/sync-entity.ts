@@ -1,13 +1,13 @@
 import { Sync } from "src/DTO/sync";
 
 export interface FindByIdProps{
-  date: string
+  id: number
 }
 
 export interface UpdateDateLastSyncProps {
   date: string
 }
-export interface SyncRepositories {
+export interface ISyncRepositories {
   fetchDateOfLastSync(): Promise<Sync | null>
   findById(data: FindByIdProps): Promise<Sync | null>
   updateDateLastSync(data: UpdateDateLastSyncProps): Promise<Sync>

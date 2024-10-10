@@ -1,22 +1,34 @@
 
-import { Text, TextInput, View } from "react-native";
+import { Text, TextInput, TextInputProps, View } from "react-native";
 import { Container, ContainerInput, Heading, InputComponent, SearchIcon } from "./style-input";
-import { MagnifyingGlass } from "phosphor-react-native";
+import { MagnifyingGlass, Spinner } from "phosphor-react-native";
+import { forwardRef, LegacyRef } from "react";
 
-export function Input(){
+;
+const SCHEMA = typeof TextInput
+interface InputType extends TextInputProps{
+  loading?: boolean
+}
+
+
+export const Input = forwardRef<TextInput, InputType>(function Input({loading = true, ...rest}: InputType, ref){
   return(
-    <Container>
+    <Container >
       <View>
         <Heading>Digite para pesquisar</Heading>
         <ContainerInput>
           <InputComponent
             placeholder="Palavra"
+            
+            {...rest}
+            
+            ref={ref}
           />
-          <SearchIcon />
+          {loading ?  <Spinner color="#FFFFFF"/> : <SearchIcon />}
         </ContainerInput>
 
       </View>
       
     </Container>
   )
-}
+})

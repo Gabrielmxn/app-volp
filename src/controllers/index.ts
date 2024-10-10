@@ -1,4 +1,6 @@
 import { makeRegisterVeberteUseCase } from "src/domain/use-cases/factories/makeRegisterVeberteUseCase";
+import { makeDeleteVerbeteUseCase } from "src/domain/use-cases/verbete/factories/makeDeleteVerbeteUseCase";
+import { makeUpdateVerbeteUseCase } from "src/domain/use-cases/verbete/factories/makeUpdateVerbeteUseCase";
 import { Verbete } from "src/DTO/verbete";
 
 export const method = {
@@ -6,6 +8,14 @@ export const method = {
     ...data,
     code: data.id
   }),
-  "UPDATE": () => console.log("update"),
-  "DELETE": () => console.log("delete"),
-}
+  "UPDATE": async (data: Verbete) => await makeUpdateVerbeteUseCase().execute({
+     ...data,
+    code: data.id
+  }),
+  "DELETE": async (data: Verbete) => {
+    await makeDeleteVerbeteUseCase().execute({
+       ...data,
+      code: data.id
+    })
+  },
+} as const

@@ -4,13 +4,39 @@ import { AboutScreen } from "@screens/about";
 import { HomeScreen } from "@screens/home";
 import { theme } from "@theme/theme";
 import { HouseSimple, Info } from "phosphor-react-native";
-import { useEffect } from "react";
-import { getVerbeteOfVolpExternalABL } from "src/controllers/verbete";
+
 
 const Tab = createBottomTabNavigator();
 
 export function ReactNavegationTab(){
-  
+  //const [loading, setLoading ] = useState(true)
+  // async function copyDb() {
+  //   try {
+  //     console.log("COPIANDO DB", loading);
+  //     await openDatabase(require('./src/lib/db/drizzle/volp.db'));
+  //    // await getVerbeteOfVolpExternalABL()
+  //     setLoading(false)
+  //   } catch (error) {
+  //     console.error("Erro ao copiarr DB:", error);
+  //   }
+  // }
+ 
+  // const { success, error } = useMigrations(db, migrations)
+
+
+  // useEffect(() => {
+  //   copyDb()
+  // }, [])
+   
+
+
+
+  // if(loading){
+  //   return(
+  //     <Text>Carregandoo...</Text>
+  //   )
+  // }
+
   return(
     <NavigationContainer >
       <Tab.Navigator

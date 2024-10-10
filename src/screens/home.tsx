@@ -1,60 +1,71 @@
-import { Header } from "@components/header";
 import { Input } from "@components/input/input";
-import { VerbeteList } from "@components/verbete-list/verbeteList";
-import { FlatList, ListRenderItem, Text, View } from "react-native";
-import { Container, ListVerbetesss } from "./style";
-import { Verbete } from "@components/verbete-list/style-verbete-list";
-import { useEffect } from "react";
-import { getVerbeteOfVolpExternalABL } from "src/controllers/verbete";
-import { db } from "src/lib/db/drizzle";
-import { verbete } from "@db/schema";
+import { FlatList, ListRenderItem, Text, TextInput, View } from "react-native";
+import { Container } from "./style";
+import { CardEntry } from "@components/card-entry/card-entry";
+import { Controller, useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { makeFetchVerbeteUseCase } from "src/domain/use-cases/verbete/factories/makeFetchVerbeteUseCase";
+import { useEffect, useState } from "react";
+import { Verbete } from "src/DTO/verbete";
+import { useQuery } from "@tanstack/react-query";
 
-const arrayList: FlatListType[] = [
-  {
-    verbete: "teste"
-  },
-  {
-    verbete: "teste2"
-  }
-  ,{
-    verbete: "teste3"
-  },
-  {
-    verbete: "teste4"
-  },
-  {
-    verbete: "teste5"
-  }
-] as const
+
+
 export type FlatListType = {
   verbete: string
 }
 
+const searchVerbeteSchema = z.object({
+  query: z.string()
+})
+
+type SearchVerbeteSchemaType = z.infer<typeof searchVerbeteSchema>
+
 export function HomeScreen(){
-  const renderItem: ListRenderItem<FlatListType> = ({ item }) => (
-    <Text>{item.verbete}</Text>
-  );
 
-  async function getTest(){
+  const { register, handleSubmit, watch, setValue, control} = useForm<SearchVerbeteSchemaType>({
+    resolver: zodResolver(searchVerbeteSchema),
+    defaultValues: {
+      query: ''
+    }
+  })
+  const query = watch('query')
+  const { data, isFetching } = useQuery<Verbete[]>({
+    queryKey: ['verbete', query],
+    queryFn: () => handleSearchVerbete(query),
+  })
+  async function handleSearchVerbete(queryW: string){
+    if(queryW === ''){
+      return []
+    }
+    const response = await makeFetchVerbeteUseCase().execute({
+      query: queryW,
+    })
 
-  await getVerbeteOfVolpExternalABL()
-
-    const test = await db.select().from(verbete).limit(4)
-    console.log('test')
-    console.log(test)
+    return response
   }
-  useEffect(() => {
-    getTest()
-  }, [])
+ 
   return(
     <>
 
       <Container>
-        <Input />
+      
+      <Controller
+        control={control}
+        name="query"
+        render={({ field: {onChange}}) => (
+          <Input loading={isFetching} onChangeText={onChange}/>
+        )}
+      />
+        
         <FlatList
-        data={arrayList}
-        renderItem={({ item }) => <VerbeteList />}
-        keyExtractor={(item) => item.verbete}
+        data={data}
+        contentContainerStyle={{ paddingBottom: 74, gap: 4 }}
+        renderItem={({ item }) => (
+            <CardEntry key={item.id} description={item.description} foreign={item.foreing}/>
+        )}
+        keyExtractor={(item) => item.id.toString()}
         />
       </Container>
     </>

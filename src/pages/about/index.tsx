@@ -1,17 +1,41 @@
+import { useLiveQuery } from "drizzle-orm/expo-sqlite";
 import { ContainerAbout, Description, Heading } from "./style";
 
-import {  Text } from "react-native";
+import {  Dimensions, Text } from "react-native";
+import { about, sync } from "@db/schema";
+import { db } from "src/lib/db/drizzle/conection";
+import RenderHTML, { MixedStyleDeclaration } from 'react-native-render-html';
+import { useMemo } from "react";
 
 
 
+
+//.replaceAll("<p>", '').replace("</p>", " ").replaceAll("</p>", "").split(" ")
 
 export function AboutPage(){
+  const {data} = useLiveQuery(db.select().from(about))
+  const { width } = Dimensions.get('window');
+
+  const tagsStyle = useMemo( () => ({
+    body: { fontSize: 16 },
+  } as Readonly<Record<string, MixedStyleDeclaration>> | undefined), [])
   return(
     <ContainerAbout>
       <Heading>Sobre o VOLP</Heading>
-      <Description>O Volp da Academia Brasileira de Letras faz o registro oficial das palavras da Língua Portuguesa, com especial atenção a sua vertente brasileira. Ele é continuamente atualizado por especialistas do idioma com base no uso extensivo de corpora e nos avanços da análise e processamento de informações.</Description>
-      <Description>A versão 2023-2024 deste Vocabulário contém mais de 382.000 entradas, as respectivas classes gramaticais e informações suplementares precisas e breves, com as atualizações feitas ao longo do período.</Description>
-      <Text>{'test.date'}</Text>
+      {/* {
+        data[0] && data[0]?.description.replaceAll("<p>", '//').replace("</p>", " ").replaceAll("</p>", "").split("//").map((resp, index) => <Description key={index}>{resp}</Description>)
+      } */}
+      {
+        data[0] &&
+        <RenderHTML 
+       
+        contentWidth={width}
+        source={{ html: data[0].description }}
+        tagsStyles={tagsStyle}
+        
+    />
+      }
+     
     </ContainerAbout>
   )
 }

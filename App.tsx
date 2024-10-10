@@ -3,48 +3,56 @@ import { StatusBar } from 'expo-status-bar';
 import { ThemeProvider } from 'styled-components';
 import { Header } from '@components/header';
 import { ReactNavegationTab } from 'src/lib/react-navegation-tab';
-import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator';
-import { db, openDatabase } from 'src/lib/db/drizzle';
-import migrations from './drizzle/migrations';
-import { Text } from 'react-native';
-import * as SQLite from "expo-sqlite";
 
-import { useDrizzleStudio } from 'expo-drizzle-studio-plugin';
-import { getVerbeteOfVolpExternalABL } from 'src/controllers/verbete';
-import { useEffect } from 'react';
+import { Text, View } from 'react-native';
 
 
+import { useEffect, useState } from 'react';
+import { ExpoSQLiteDatabase } from 'drizzle-orm/expo-sqlite';
+import { initalize } from 'src/lib/db/drizzle/initializeApp';
+import { LoadingComponent } from '@components/loading/loading-component';
+import { QueryClient, QueryClientProvider, useMutation, useQuery } from '@tanstack/react-query';
 
 
 
 
 
+
+export let db: ExpoSQLiteDatabase<Record<string, never>>;
 export default function App() {
+  const [loading, setLoading ] = useState(true)
 
-  async function copyDb(){
-    await openDatabase(require('./src/lib/db/drizzle/volp.db'))
+
+  async function copyDb() {
+    try {
+        console.log("COPIANDO DB", loading);
+        await initalize()
+        console.log("Copiado", loading);
+
+        setLoading(false)
+    } catch (error) {
+      console.error("Erro ao copiarr DB:", error);
+    }
   }
-  const { success, error } = useMigrations(db, migrations);
-
-const dbConfig = SQLite.openDatabaseSync("volp.db");
-  useDrizzleStudio(dbConfig);
-
-
  
-  if(!success){
+  
+
+
+  useEffect(() => {
+    copyDb()
+  }, [])
+
+
+  if(loading){
     return(
-      <Text>Carregando...</Text>
+       <LoadingComponent />
     )
   }
+  const queryClient = new QueryClient()
 
-  if(error){
-    return(
-      <Text>error...</Text>
-    )
-  }
 
-  copyDb()
   return (
+    <QueryClientProvider client={queryClient}>
     <ThemeProvider theme={theme}>
       <Header />   
       <ReactNavegationTab />
@@ -54,6 +62,12 @@ const dbConfig = SQLite.openDatabaseSync("volp.db");
         backgroundColor='transparent'
       />
     </ThemeProvider> 
+    </QueryClientProvider>
   );
-}
+
+
+  }
+
+ 
+
 

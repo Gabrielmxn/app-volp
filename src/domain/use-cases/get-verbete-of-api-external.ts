@@ -13,6 +13,7 @@ interface Alters {
   about: {
     id: number
     about: string
+    executionDateOperation: number
   }
 }
 export interface GetVerbeteOfApiExternalUseCaseRequest {

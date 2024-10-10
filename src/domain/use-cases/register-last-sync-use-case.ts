@@ -1,17 +1,17 @@
-import { SyncRepositories } from "../repositories/entidades/sync-entity";
+import { ISyncRepositories } from "../repositories/entidades/sync-entity";
 
 export interface RegisterLastSynsUseCaseRequest {
-  id: number
+  date: string
 }
 export interface RegisterLastSynsUseCaseResponse{}
 export class RegisterLastSynsUseCase{
-  constructor(private syncRepositories: SyncRepositories){}
+  constructor(private syncRepositories: ISyncRepositories){}
 
-  async execute({id}: RegisterLastSynsUseCaseRequest){
+  async execute({date}: RegisterLastSynsUseCaseRequest){
     const sync = await this.syncRepositories.findById({
-      id,
+      date
     })
-
+    console.log("o que é iossso", sync?.date)
     if(sync){
       return {
         sync

@@ -1,3 +1,4 @@
+import { RenderHTML } from 'react-native-render-html';
 import { Container } from "@components/style";
 import styled from "styled-components/native";
 
@@ -11,6 +12,6 @@ export const Heading = styled.Text`
   text-align: center;
 `
 
-export const Description = styled.Text`
+export const Description = styled(RenderHTML)`
   font-size: 16px;
 `
