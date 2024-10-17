@@ -4,7 +4,7 @@ import { Container } from './style';
 export function LoadingComponent(){
   return(
     <Container>
-       <Text>Carregandoo...</Text>
+       <Text>Atualizando...</Text>
     </Container>
   )
 }

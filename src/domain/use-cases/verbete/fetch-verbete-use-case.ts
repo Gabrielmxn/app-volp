@@ -2,17 +2,25 @@ import { VerbeteRepositoriesEntidade } from "src/domain/repositories/entidades/v
 
 
 export interface FetchVeberteUseCaseRequest {
- query: string
+ query?: string
 }
 export class FetchVeberteUseCase{
   constructor(private verbeteRepository: VerbeteRepositoriesEntidade){}
 
-  async execute({query}: FetchVeberteUseCaseRequest){
+  async execute({query = ''}: FetchVeberteUseCaseRequest){
     const response = await this.verbeteRepository.fetchVerbete({
       query
     })
 
-    console.log("get verbete:", response)
+    // if(response.length === 0){
+    //   const responseWithLev = await this.verbeteRepository.fetchVerbeteWithLev({
+    //     query
+    //   })
+    //   console.log('dentro do IF responseWithLev')
+    //   console.log(responseWithLev)
+    //   return responseWithLev
+    // }
+   
     return response;
   }
 }

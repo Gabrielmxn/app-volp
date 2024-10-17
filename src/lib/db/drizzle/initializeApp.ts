@@ -2,6 +2,7 @@ import { openDatabaseSync } from "expo-sqlite";
 import { openDatabase } from "./open";
 import { initializeDatabaseConnection } from "./conection";
 import { getVerbeteOfVolpExternalABL } from "src/controllers/verbete";
+import { fuseConection } from "@storage/fuse";
 
 export async function initalize() {
     try {
@@ -9,6 +10,7 @@ export async function initalize() {
         const expoDb = openDatabaseSync('volp.db')
         initializeDatabaseConnection(expoDb)
         await getVerbeteOfVolpExternalABL()
+        await fuseConection()
     } catch (error) {
       console.error("Erro ao copiarr DB:", error);
     }

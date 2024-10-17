@@ -5,7 +5,7 @@ export interface FindByIdProps {
   id: number
 }
 export interface FetchVerbeteProps{
-  query: string
+  query?: string
 }
 export interface VerbeteRepositoriesEntidade {
   registerVerbete(data: Verbete): Promise<Verbete | null>
@@ -13,5 +13,5 @@ export interface VerbeteRepositoriesEntidade {
   updateVerbete(data: Verbete): Promise<Verbete | null>
   deleteVerbete(data: Verbete): Promise<Verbete | null>
   fetchVerbete(data: FetchVerbeteProps): Promise<Verbete[] | []>
-  
+  fetchVerbeteWithLev(data: FetchVerbeteProps): Promise<Verbete[] | []>
 }

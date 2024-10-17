@@ -9,6 +9,7 @@ import { makeFetchVerbeteUseCase } from "src/domain/use-cases/verbete/factories/
 import { useEffect, useState } from "react";
 import { Verbete } from "src/DTO/verbete";
 import { useQuery } from "@tanstack/react-query";
+import { fuse } from "@storage/fuse";
 
 
 
@@ -44,8 +45,25 @@ export function HomeScreen(){
     })
 
     return response
+  //   const response = fuse.search('casaa')
+  // /**  const regex =  /\w+\.*(\..*)/
+  // const verbete = description.replace(regex, '')
+  // const verbeteDescriptionRegex = description.replace(/\w+\.*(.)/, '').trim()
+  // const [_, auxVerbete] = description.split(verbete)
+  // const [auxVerbetes, tw] = description.split(verbeteDescriptionRegex) */
+
+  // const regex =  /\w+\.*(\..*)/
+
+  //   return  response.map(response => {
+  //     const description = response.item.description.replace(regex, '').trim()
+  //     return {
+  //       ...response.item,
+  //       description
+  //     }
+  //   })
   }
  
+  
   return(
     <>
 

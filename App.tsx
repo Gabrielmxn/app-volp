@@ -18,6 +18,7 @@ import { QueryClient, QueryClientProvider, useMutation, useQuery } from '@tansta
 
 
 
+
 export let db: ExpoSQLiteDatabase<Record<string, never>>;
 export default function App() {
   const [loading, setLoading ] = useState(true)
@@ -28,8 +29,8 @@ export default function App() {
         console.log("COPIANDO DB", loading);
         await initalize()
         console.log("Copiado", loading);
-
         setLoading(false)
+        
     } catch (error) {
       console.error("Erro ao copiarr DB:", error);
     }

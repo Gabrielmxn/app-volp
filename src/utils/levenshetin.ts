@@ -1,5 +1,8 @@
-export function levenshtein(a: string, b: string) {
+
+
+export function levenshtein(...params: unknown[]): number {
   const matrix = [];
+  const [a, b] = params as string[];
 
   if (a.length === 0) return b.length;
   if (b.length === 0) return a.length;

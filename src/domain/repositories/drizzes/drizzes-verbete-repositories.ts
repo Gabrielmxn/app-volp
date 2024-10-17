@@ -3,9 +3,10 @@ import { Verbete } from "src/DTO/verbete";
 import {  FetchVerbeteProps, VerbeteRepositoriesEntidade } from "../entidades/verbete-entidades";
 import { db } from 'src/lib/db/drizzle/conection';
 import { verbete } from "@db/schema";
-import { eq, like, sql } from "drizzle-orm";
+import { eq, ilike, like, sql } from "drizzle-orm";
 import { FindByIdProps } from "../entidades/sync-entity";
-
+import { levenshtein } from "@utils/levenshetin";
+import * as SQLite from 'expo-sqlite';
 
 
 
@@ -20,6 +21,25 @@ export class DrizzesVerbeteRepositories implements VerbeteRepositoriesEntidade{
     const response = db.select().from(verbete).where(sql`${verbete.description} like ${data.query} COLLATE NOACCENT`).limit(100)
 
     return response
+
+  }
+
+
+  async fetchVerbeteWithLev({query}: FetchVerbeteProps){
+    const dbww = await db.select().from(verbete)
+
+    const test = dbww.filter(response => {
+      const distance = levenshtein(response.description, query)
+console.log(distance)
+      if(distance <= 2){
+        console.log(distance)
+        return response
+      }
+    })
+
+    return test
+    
+   
 
   }
   async deleteVerbete(data: Verbete): Promise<Verbete | null> {
