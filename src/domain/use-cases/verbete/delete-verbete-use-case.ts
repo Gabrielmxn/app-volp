@@ -19,7 +19,7 @@ export class DeleteVeberteUseCase{
       console.error("ID NOT FOUND")
     }
     const response = await this.verbeteRepository.deleteVerbete({
-      id: code, description, foreing
+      id: code, description, foreing, soundex: null
     })
 
     console.log("DELETADO:", response)

@@ -12,8 +12,9 @@ import * as SQLite from 'expo-sqlite';
 
 export class DrizzesVerbeteRepositories implements VerbeteRepositoriesEntidade{
   async fetchVerbete(data: FetchVerbeteProps) {
-    const response = db.select().from(verbete).where(like(verbete.description, `${data.query}%`)).limit(100)
-
+    const response = db.select().from(verbete).where(like(verbete.description, `%${data.query}%`)).limit(100)
+    
+    
     return response
 
   }

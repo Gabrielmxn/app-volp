@@ -1,5 +1,6 @@
+import { regexVerbete } from "@utils/regexVerbete";
 import { VerbeteRepositoriesEntidade } from "../repositories/entidades/verbete-entidades"
-
+import {soundex} from 'soundex-code';
 
 export interface RegisterVeberteUseCaseRequest {
   code: number
@@ -20,7 +21,7 @@ export class RegisterVeberteUseCase{
     }
     
     const response = await this.verbeteRepository.registerVerbete({
-      id: code, description, foreing
+      id: code, description, foreing, soundex: soundex(regexVerbete(description))
     })
 
 

@@ -1,3 +1,5 @@
+import { regexVerbete } from "@utils/regexVerbete"
+import { soundex } from "soundex-code"
 import { VerbeteRepositoriesEntidade } from "src/domain/repositories/entidades/verbete-entidades"
 
 
@@ -19,7 +21,7 @@ export class UpdateVeberteUseCase{
       console.error("ID NOT FOUND")
     }
     const response = await this.verbeteRepository.updateVerbete({
-      id: code, description, foreing
+      id: code, description, foreing, soundex: soundex(regexVerbete(description))
     })
     console.log("update:", response)
 

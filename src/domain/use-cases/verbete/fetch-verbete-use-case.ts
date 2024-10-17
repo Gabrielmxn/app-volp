@@ -12,6 +12,7 @@ export class FetchVeberteUseCase{
       query
     })
 
+    console.log(response)
     // if(response.length === 0){
     //   const responseWithLev = await this.verbeteRepository.fetchVerbeteWithLev({
     //     query

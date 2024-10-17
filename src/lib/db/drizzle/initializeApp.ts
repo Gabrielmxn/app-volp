@@ -9,8 +9,9 @@ export async function initalize() {
         await openDatabase(require('./volp.db'));
         const expoDb = openDatabaseSync('volp.db')
         initializeDatabaseConnection(expoDb)
+
         await getVerbeteOfVolpExternalABL()
-        await fuseConection()
+        
     } catch (error) {
       console.error("Erro ao copiarr DB:", error);
     }
