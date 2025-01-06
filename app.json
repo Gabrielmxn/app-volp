@@ -27,7 +27,9 @@
       [
         "expo-asset",
         {
-          "assets": ["path/to/src/lib/db/drizzle/volp.db"]
+          "assets": [
+            "path/to/src/lib/db/drizzle/volp.db"
+          ]
         }
       ]
     ]

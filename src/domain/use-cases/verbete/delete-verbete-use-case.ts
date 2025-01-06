@@ -15,14 +15,14 @@ export class DeleteVeberteUseCase{
       id: code
     })
 
-    if(!verbeteExists){
-      console.error("ID NOT FOUND")
-    }
-    const response = await this.verbeteRepository.deleteVerbete({
-      id: code, description, foreing, soundex: null
-    })
+    if(verbeteExists){
+       const response = await this.verbeteRepository.deleteVerbete({
+          id: code, description, foreing, soundex: null
+       })
 
-    console.log("DELETADO:", response)
-    return response;
+       return response;
+    }
+  
+    
   }
 }
