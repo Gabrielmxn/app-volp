@@ -1,10 +1,9 @@
-import { DrizzesSyncRepositories } from "src/domain/repositories/drizzes/drizzes-sync-repositories"
-import { GetDateSyncUseCase } from "../get-date-sync"
+import { DrizzleSyncRepositories } from "src/domain/repositories/drizzle/drizzle-sync-repositories"
 import { UpdateLastSyncUseCase } from "../update-last-sync-use-case"
 
 
 export function makeUpdateLastSyncUseCase(){
-  const syncRepositories = new DrizzesSyncRepositories()
+  const syncRepositories = new DrizzleSyncRepositories()
   const updateLastSyncUseCase = new UpdateLastSyncUseCase(syncRepositories)
 
   return updateLastSyncUseCase

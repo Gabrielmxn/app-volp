@@ -16,6 +16,8 @@ export async function openDatabase(pathToDatabaseFile: string) {
     console.log('Banco de dados já existe. Não será copiado novamente.');
     return;
   }
+
+   console.log('Banco de dados está sendo copiado');
   await FileSystem.copyAsync({
     from: asset.localUri,
     to: FileSystem.documentDirectory + 'SQLite/volp.db',

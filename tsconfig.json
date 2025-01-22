@@ -3,7 +3,10 @@
   "compilerOptions": {
     "module": "ES2022",
     "strict": true,
+    "moduleResolution":"node",
     "baseUrl": "./",
+    "types": ["@types/styled-components-react-native"],
+    "typeRoots": ["./node_modules/@types", "./src/@types"],
     "paths": {
       "@assets/*": [
         "./src/assets/*"
@@ -28,7 +31,11 @@
       ],
       "@db/*": [
         "./src/db/*"
+      ],
+      "@pages/*": [
+        "./src/pages/*"
       ]
     }
-  }
+  },
+  "include": ["src", "@types/styled.d.ts", "**/*.ts", "**/*.tsx"]
 }

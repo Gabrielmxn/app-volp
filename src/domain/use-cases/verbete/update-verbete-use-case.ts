@@ -1,6 +1,4 @@
-import { regexVerbete } from "@utils/regexVerbete"
-import { soundex } from "soundex-code"
-import { VerbeteRepositoriesEntidade } from "src/domain/repositories/entidades/verbete-entidades"
+import { VerbeteRepositoriesEntity } from "src/domain/repositories/entity/verbete-entidades"
 
 
 export interface UpdateVeberteUseCaseRequest {
@@ -9,7 +7,7 @@ export interface UpdateVeberteUseCaseRequest {
   foreing: boolean
 }
 export class UpdateVeberteUseCase{
-  constructor(private verbeteRepository: VerbeteRepositoriesEntidade){}
+  constructor(private verbeteRepository: VerbeteRepositoriesEntity){}
 
   async execute({code, description, foreing}: UpdateVeberteUseCaseRequest){
     const verbeteExists = await this.verbeteRepository.findById({
@@ -18,10 +16,10 @@ export class UpdateVeberteUseCase{
 
     if(verbeteExists){
        const response = await this.verbeteRepository.updateVerbete({
-      id: code, description, foreing, soundex: soundex(regexVerbete(description))
-      })
-
+      id: code, description, foreing})
       return response;
+      }
+
+      
     }
   }
-}

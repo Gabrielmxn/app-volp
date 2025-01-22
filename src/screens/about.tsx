@@ -1,4 +1,5 @@
-import { AboutPage } from "src/pages/about";
+import { AboutPage } from "@pages/about/about.page";
+
 
 export function AboutScreen(){
   return(

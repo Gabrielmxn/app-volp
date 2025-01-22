@@ -1,4 +1,4 @@
-import { VerbeteRepositoriesEntidade } from "src/domain/repositories/entidades/verbete-entidades"
+import { VerbeteRepositoriesEntity } from "src/domain/repositories/entity/verbete-entidades"
 
 
 export interface DeleteVeberteUseCaseRequest {
@@ -7,17 +7,18 @@ export interface DeleteVeberteUseCaseRequest {
   foreing: boolean
 }
 export class DeleteVeberteUseCase{
-  constructor(private verbeteRepository: VerbeteRepositoriesEntidade){}
+  constructor(private verbeteRepository: VerbeteRepositoriesEntity){}
 
   async execute({code, description, foreing}: DeleteVeberteUseCaseRequest){
-    console.log("DELETADO1:", code, description, foreing)
+ 
     const verbeteExists = await this.verbeteRepository.findById({
       id: code
     })
 
+ 
     if(verbeteExists){
        const response = await this.verbeteRepository.deleteVerbete({
-          id: code, description, foreing, soundex: null
+          id: code, description, foreing
        })
 
        return response;

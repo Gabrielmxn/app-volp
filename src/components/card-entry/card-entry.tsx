@@ -1,4 +1,4 @@
-import { Alert, View } from "react-native";
+import { ToastAndroid, Alert, View } from "react-native";
 import { Container, Aux, Verbete, Tag, ViewDiv } from "./style-verbete-list";
 import * as Clipboard from 'expo-clipboard';
 
@@ -18,7 +18,9 @@ export function CardEntry({
 
 
   async function copyVerbete(verbeteForCopy: string){
+
     await Clipboard.setStringAsync(verbeteForCopy)
+    ToastAndroid.show(`A palavra "${verbeteForCopy}" foi copiada.`, ToastAndroid.SHORT)
   }
   
   return(

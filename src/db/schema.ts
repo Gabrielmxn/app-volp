@@ -16,8 +16,7 @@ export const verbete = sqliteTable('verbete', {
   description: text('description').notNull(),
   foreing: integer('foreing', {
     mode: "boolean"
-  }).notNull().default(false),
-  soundex: text('soundex'),
+  }).notNull().default(false)
 })
 
 //(id INTEGER PRIMARY KEY NOT NULL, description TEXT NOT NULL, execution_date_operation INTEGER);

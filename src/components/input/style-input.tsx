@@ -19,11 +19,11 @@ export const ContainerInput = styled.View`
   align-items: center;
   border-radius: 4px;
   padding: 8px;
-  background-color: ${(props) => props.theme.ablGreen};
+  background-color: ${({theme}) => theme.ablGreen};
 `
 
 export const SearchIcon = styled(MagnifyingGlass)`
-  color: ${(props) => props.theme.white};
+  color: ${(props) => props.theme.ablGreen}
 
 `
 export const InputComponent = styled.TextInput.attrs(props => ({

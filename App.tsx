@@ -1,69 +1,86 @@
 import { theme } from '@theme/theme';
 import { StatusBar } from 'expo-status-bar';
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from 'styled-components/native';
 import { Header } from '@components/header';
-import { ReactNavegationTab } from 'src/lib/react-navegation-tab';
+import * as SplashScreen from 'expo-splash-screen';
+import {  Text, View } from 'react-native';
+import { useCallback, useEffect, useState } from 'react';
 
-import { Text, View } from 'react-native';
-
-
-import { useEffect, useState } from 'react';
-import { ExpoSQLiteDatabase } from 'drizzle-orm/expo-sqlite';
 import { initalize } from 'src/lib/db/drizzle/initializeApp';
-import { LoadingComponent } from '@components/loading/loading-component';
-import { QueryClient, QueryClientProvider, useMutation, useQuery } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactNavigationTab } from '@routes/index';
 
 
+//export let db: ExpoSQLiteDatabase<Record<string, never>>;
+
+SplashScreen.preventAutoHideAsync().then((result) => console.log(`SplashScreen.preventAutoHideAsync() succeeded: ${result}`))
+.catch(console.warn);
 
 
+SplashScreen.setOptions({
+  duration: 1000,
+  fade: false,
+   
+});
 
 
-
-export let db: ExpoSQLiteDatabase<Record<string, never>>;
 export default function App() {
-  const [loading, setLoading ] = useState(true)
+  const [appIsReady, setAppIsReady] = useState(false);
+  const queryClient = new QueryClient()
 
 
   async function copyDb() {
     try {
-        console.log("COPIANDO DB", loading);
         await initalize()
-        console.log("Copiado", loading);
-        setLoading(false)
-        
+                
     } catch (error) {
-      console.error("Erro ao copiarr DB:", error);
+      throw new Error("Não foi possível recuperar as palavras")
+    } finally {
+      setAppIsReady(true);
     }
   }
  
-  
-
 
   useEffect(() => {
-    copyDb()
-  }, [])
+    async function prepare() {
+      try {
+        await copyDb();
+      } catch (e) {
+        throw new Error("Não foi possível recuperar as palavras2")
+      } finally {
+        setAppIsReady(true);
+      }
+    }
 
+    prepare();
+  }, []);
 
-  if(loading){
-    return(
-       <LoadingComponent />
-    )
+  const onLayoutRootView = useCallback(() => {
+    if (appIsReady) {
+      SplashScreen.hide();
+    }
+  }, [appIsReady]);
+
+  if (!appIsReady) {
+    return null;
   }
-  const queryClient = new QueryClient()
-
 
   return (
-    <QueryClientProvider client={queryClient}>
     <ThemeProvider theme={theme}>
-      <Header />   
-      <ReactNavegationTab />
-      <StatusBar 
-        style="auto" 
-        translucent
-        backgroundColor='transparent'
-      />
+    <View style={{ flex: 1, height: '100%' }} onLayout={onLayoutRootView}>
+      <QueryClientProvider client={queryClient}>
+       
+          <Header />   
+          <ReactNavigationTab />
+          <StatusBar 
+            style="auto" 
+            translucent
+            backgroundColor='transparent'
+          />
+        
+      </QueryClientProvider>
+    </View>
     </ThemeProvider> 
-    </QueryClientProvider>
   );
 
 

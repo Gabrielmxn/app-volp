@@ -4,21 +4,25 @@
     "slug": "volp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "image": "./assets/splash-image.png",
+      "backgroundColor": "#027947"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "splash": {
+        "image": "./assets/splash-image.png"
+      }
     },
     "android": {
+      "splash": {
+        "image": "./assets/splash-image.png"
+      },
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+        "foregroundImage": "./assets/adaptive-icon.png"
+      },
+      "package": "com.abletras.volp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -28,10 +32,43 @@
         "expo-asset",
         {
           "assets": [
-            "path/to/src/lib/db/drizzle/volp.db"
+            "./src/lib/db/drizzle/volp.db"
           ]
         }
-      ]
-    ]
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#027947",
+          "image": "./assets/splash-image.png",
+          "enableFullScreenImage_legacy": true,
+          "dark": {
+            "image": "./assets/splash-image.png",
+            "backgroundColor": "#013e24"
+          },
+          "imageWidth": 300,
+          "android": {
+            "resizeMode": "cover"
+          }
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "usesCleartextTraffic": true
+          },
+          "ios": {
+            "flipper": true
+          }
+        }
+      ],
+      "expo-sqlite"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "97b87d08-8970-4091-b72b-830a1f1c0497"
+      }
+    }
   }
 }

@@ -1,4 +1,4 @@
-import { DrizzleAboutRepository } from "src/domain/repositories/drizzes/drizzle-about-repository"
+import { DrizzleAboutRepository } from "src/domain/repositories/drizzle/drizzle-about-repository"
 import { UpdateAboutUseCase } from "../update-about-use-case"
 
 

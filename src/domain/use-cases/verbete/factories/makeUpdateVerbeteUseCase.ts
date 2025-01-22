@@ -1,9 +1,9 @@
-import { DrizzesVerbeteRepositories } from "src/domain/repositories/drizzes/drizzes-verbete-repositories"
+import { DrizzleVerbeteRepositories } from "src/domain/repositories/drizzle/drizzle-verbete-repositories"
 import { UpdateVeberteUseCase } from "../update-verbete-use-case"
 
 
 export function makeUpdateVerbeteUseCase(){
-  const verbeteRepository = new DrizzesVerbeteRepositories()
+  const verbeteRepository = new DrizzleVerbeteRepositories()
 
   const updateVeberteUseCase = new UpdateVeberteUseCase(verbeteRepository)
 

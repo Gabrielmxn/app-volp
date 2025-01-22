@@ -1,39 +1,31 @@
-import { useLiveQuery } from "drizzle-orm/expo-sqlite";
-import { ContainerAbout, Description, Heading } from "./style";
+import { ContainerAbout, Heading } from "./style";
+import HTMLView from 'react-native-htmlview';
+import { Text } from "react-native";
+import { useAboutModel } from "./about.model";
 
-import {  Dimensions, Text } from "react-native";
-import { about, sync } from "@db/schema";
-import { db } from "src/lib/db/drizzle/conection";
-import RenderHTML, { MixedStyleDeclaration } from 'react-native-render-html';
-import { useMemo } from "react";
+type AboutView = ReturnType<typeof useAboutModel>
 
+export function AboutView(props: AboutView){
+  const { about } = props
 
-
-
-//.replaceAll("<p>", '').replace("</p>", " ").replaceAll("</p>", "").split(" ")
-
-export function AboutPage(){
-  const {data} = useLiveQuery(db.select().from(about))
-  const { width } = Dimensions.get('window');
-
-  const tagsStyle = useMemo( () => ({
-    body: { fontSize: 16 },
-  } as Readonly<Record<string, MixedStyleDeclaration>> | undefined), [])
   return(
     <ContainerAbout>
       <Heading>Sobre o VOLP</Heading>
-      {/* {
-        data[0] && data[0]?.description.replaceAll("<p>", '//').replace("</p>", " ").replaceAll("</p>", "").split("//").map((resp, index) => <Description key={index}>{resp}</Description>)
-      } */}
+      <Text>{about?.aboutDescription.length}</Text>
       {
-        data[0] &&
-        <RenderHTML 
-       
-        contentWidth={width}
-        source={{ html: data[0].description }}
-        tagsStyles={tagsStyle}
-        
-    />
+        about?.aboutDescription &&
+          <HTMLView 
+            value={about?.aboutDescription}
+            stylesheet={{
+              p: {
+                fontSize: 16,
+                margin: 0,
+                padding: 0,
+                color: '#000',
+              }
+            }}
+            paragraphBreak=""
+          />
       }
      
     </ContainerAbout>

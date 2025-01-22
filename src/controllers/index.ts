@@ -4,14 +4,18 @@ import { makeUpdateVerbeteUseCase } from "src/domain/use-cases/verbete/factories
 import { Verbete } from "src/DTO/verbete";
 
 export const method = {
-  "INSERT": async (data: Verbete) => await makeRegisterVeberteUseCase().execute({
-    ...data,
-    code: data.id
-  }),
-  "UPDATE": async (data: Verbete) => await makeUpdateVerbeteUseCase().execute({
+  "INSERT": async (data: Verbete) => {
+      await makeRegisterVeberteUseCase().execute({
+      ...data,
+      code: data.id
+    })
+  },
+  "UPDATE": async (data: Verbete) => {
+    await makeUpdateVerbeteUseCase().execute({
      ...data,
     code: data.id
-  }),
+  })
+  },
   "DELETE": async (data: Verbete) => {
     await makeDeleteVerbeteUseCase().execute({
        ...data,

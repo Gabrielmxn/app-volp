@@ -2,36 +2,55 @@ import { makeGetDateSyncUseCase } from "src/domain/use-cases/factories/makeGetDa
 import { makeVerbeteOfApiExternal } from "src/domain/use-cases/factories/makeVerbeteOfApiExternal";
 import { method } from ".";
 import { makeUpdateLastSyncUseCase } from "src/domain/use-cases/factories/makeUpdateLastSyncUseCase";
-import { popular } from "drizzle/seed";
 import { makeUpdateAboutUseCase } from "src/domain/use-cases/factories/makeUpdateAboutUseCase";
 
 
-
-export async function  getVerbeteOfVolpExternalABL(){
+interface GetVerbeteOfVolpExternalABLProps {
+  setPorcentagem: (porcetagem: number) => void
+}
+export async function  getVerbeteOfVolpExternalABL({setPorcentagem}: GetVerbeteOfVolpExternalABLProps){
   const { date } = await makeGetDateSyncUseCase().execute({})
-  console.log(date)
-  const response = await makeVerbeteOfApiExternal().execute({
-    date: date ? date : '2024-10-02_01:15:20'
-  })
-console.log(response.syncDate)
-  const {sync} = await makeUpdateLastSyncUseCase().execute({
-    date: response.syncDate
+  
+  const { about,alters, syncDate} = await makeVerbeteOfApiExternal().execute({
+    date: date ? date : '1980-10-02_01:15:20'
   })
 
-    for(let i of response.alters){
-        method[i.operation]({
+      let index = 0
+     for await (let i of alters){
+        const verbeteDescriptionRegex = i.description.replace(/\w+\.*(.)/, '').trim()
+        const [auxVerbetes, tw] = i.description.split(verbeteDescriptionRegex)
+        index++;
+
+       const porcentagem = Math.floor((100 * index) / alters.length);
+        if (porcentagem !== Math.floor((100 * (index - 1)) / alters.length)) {
+          console.log("quanto está " + porcentagem)
+          setPorcentagem(porcentagem);
+        }
+      
+
+        await method[i.operation]({
           id: i.code,
           foreing: i.estrangeira,
-          description: i.description
+          description: i.description,
         })
+
+        await new Promise((resolve) => setTimeout(resolve, 0));
+
+    
       }
  
  
+ 
 
-if(response.about !== null)
-  await makeUpdateAboutUseCase().execute({
-    ...response.about
+  if(about !== null){
+    await makeUpdateAboutUseCase().execute({
+      ...about
+    })
+  }
+  
+
+  await makeUpdateLastSyncUseCase().execute({
+    date: syncDate
   })
-
-
+  return
 }
