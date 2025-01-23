@@ -5,7 +5,7 @@ import { Input } from "@components/input/input"
 import { FlatList, Text } from "react-native"
 import { CardEntry } from "@components/card-entry/card-entry"
 import { Container } from "./home.styles"
-import { LoadingPorc } from "@components/loadingPorc"
+import { AppUpdateLoading } from "@components/AppUpdateLoading"
 
 type HomeViewProps = ReturnType<typeof useHomeModel>
 
@@ -14,9 +14,10 @@ export function HomeView(props: HomeViewProps){
   const { control, isFetching, verbeteList, porcentagem, loading} = props
   
 
-  if(porcentagem > 0){
-   return  <LoadingPorc porc={porcentagem}/>
+  if(loading){
+   return  <AppUpdateLoading percentage={porcentagem}/>
   }
+
   return(
       <Container>
         <Controller

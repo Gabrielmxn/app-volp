@@ -39,16 +39,21 @@ export function useHomeModel(){
   function porcetagemSet(porc: number){
     console.log('porcetagemSetc ' + porc)
     setPorcentagem(porc)
+     setLoading(true)
   }
   async function getVerbete(){
     setLoading(true)
-    getVerbeteOfVolpExternalABL({
+     await new Promise((resolve) => setTimeout(resolve, 0));
+    await getVerbeteOfVolpExternalABL({
       setPorcentagem: porcetagemSet,
     })
- 
-    setPorcentagem(0)
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    setLoading(false)
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
   }
   useEffect(() => {
+    
       getVerbete()
   }, [])
   return {

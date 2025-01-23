@@ -8,10 +8,10 @@ type AboutView = ReturnType<typeof useAboutModel>
 export function AboutView(props: AboutView){
   const { about } = props
 
+
   return(
     <ContainerAbout>
       <Heading>Sobre o VOLP</Heading>
-      <Text>{about?.aboutDescription.length}</Text>
       {
         about?.aboutDescription &&
           <HTMLView 

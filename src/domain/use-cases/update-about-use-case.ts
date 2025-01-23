@@ -1,6 +1,6 @@
 
 import { AboutRepositoryEntity } from "../repositories/entity/about-entity"
-import { about as aboutSchema } from "@db/schema"
+
 
 
 export interface UpdateAboutUseCaseRequest {

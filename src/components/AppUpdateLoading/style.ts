@@ -1,4 +1,3 @@
-import { theme } from '@theme/theme';
 import styled from "styled-components/native";
 
 export const LoadingPor = styled.View`
@@ -8,11 +7,11 @@ export const LoadingPor = styled.View`
  background-color: #fff;
 
 `
-interface CorcentagemProps {
-  porcentagem: number
+interface PercentageProps {
+  percentage: number
 }
-export const Corcentagem = styled.View<CorcentagemProps>`
-  width: ${({porcentagem}) => porcentagem}%;
+export const Percentage = styled.View<PercentageProps>`
+  width: ${({percentage}) => percentage}%;
   height: 100%;
   background-color: ${props => props.theme.ablGreen};
    

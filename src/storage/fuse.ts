@@ -1,6 +1,5 @@
-import { drizzle, ExpoSQLiteDatabase } from "drizzle-orm/expo-sqlite";
-import { SQLiteDatabase } from "expo-sqlite";
-import Fuse, { IFuseOptions } from "fuse.js";
+
+import Fuse from "fuse.js";
 import { makeFetchVerbeteUseCase } from "src/domain/use-cases/verbete/factories/makeFetchVerbeteUseCase";
 import { Verbete } from "src/DTO/verbete";
 

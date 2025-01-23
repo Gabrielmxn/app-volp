@@ -1,8 +1,8 @@
 
-import { Text, TextInput, TextInputProps, View } from "react-native";
+import { TextInput, TextInputProps, View } from "react-native";
 import { Container, ContainerInput, Heading, InputComponent, SearchIcon } from "./style-input";
-import { MagnifyingGlass, Spinner } from "phosphor-react-native";
-import { forwardRef, LegacyRef } from "react";
+import { Spinner } from "phosphor-react-native";
+import { forwardRef } from "react";
 
 ;
 const SCHEMA = typeof TextInput

@@ -1,4 +1,4 @@
-import { ToastAndroid, Alert, View } from "react-native";
+import { ToastAndroid} from "react-native";
 import { Container, Aux, Verbete, Tag, ViewDiv } from "./style-verbete-list";
 import * as Clipboard from 'expo-clipboard';
 

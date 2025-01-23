@@ -19,7 +19,7 @@ export const Aux = styled.Text`
 `
 
 export const Tag = styled.Text`
-margin-left: 8px;
+  margin-left: 8px;
 
   font-size: 12px;
   box-shadow: 10px 5px 5px red;
