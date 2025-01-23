@@ -19,7 +19,7 @@ export const Percentage = styled.View<PercentageProps>`
 `
 
 export const Description = styled.Text`
-  margin-top: 8;
+  margin-top: 8px;
   text-align: center;
   color: ${props => props.theme.ablGreen};
   font-weight: 500;
